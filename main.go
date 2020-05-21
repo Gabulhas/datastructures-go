@@ -5,12 +5,13 @@ import (
 )
 
 func main() {
-	head := datastructures.MakeNode()
+	head := datastructures.SLMakeNode()
 	head.Value = 99
 	for i := 0; i < 10; i++ {
-		node := datastructures.MakeNode()
+		node := datastructures.SLMakeNode()
 		node.Value = i
 		datastructures.SLAppendNode(head, node)
 	}
 	datastructures.SLDisplayValues(head)
+	//	datastructures.SLFindPrevious(head, node)
 }

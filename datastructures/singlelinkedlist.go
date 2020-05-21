@@ -2,14 +2,15 @@ package datastructures
 
 import "fmt"
 
+//SLNodeInt SL = Single Link
 //SLNodeInt contains struct to store a Single Linked list struct containing a int Value
 type SLNodeInt struct {
 	Next  *SLNodeInt
 	Value int
 }
 
-//MakeNode Makes new node
-func MakeNode() *SLNodeInt {
+//SLMakeNode Makes new node
+func SLMakeNode() *SLNodeInt {
 
 	return new(SLNodeInt)
 }
@@ -40,7 +41,28 @@ func SLInsertFirst(list *SLNodeInt, node *SLNodeInt) {
 	node.Next = list
 }
 
-//SLAppendOrder adds node to the list in the right spot
-func SwapNodes(head *SLNodeInt, nodeA *SLNodeInt, nodeB *SLNodeInt) {
+//SLFindPrevious finds previous node
+func SLFindPrevious(head *SLNodeInt, node *SLNodeInt) *SLNodeInt {
+	if head == nil || node == nil {
+		return nil
+	}
+	for head.Next != node || head.Next != nil {
+		head = head.Next
+	}
+	if head.Next == node {
+		return head
+	}
+	return nil
+}
 
+//SLSwapNodes adds node to the list in the right spot
+func SLSwapNodes(head *SLNodeInt, nodeA *SLNodeInt, nodeB *SLNodeInt) {
+	for head != nil {
+		if head == nodeA {
+
+		}
+		if head == nodeB {
+
+		}
+	}
 }
