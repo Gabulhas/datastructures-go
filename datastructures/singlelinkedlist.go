@@ -30,9 +30,10 @@ func SLAppendNode(list *SLNodeInt, node *SLNodeInt) {
 
 //SLDisplayValues display all values on a list
 func SLDisplayValues(node *SLNodeInt) {
-	for node != nil {
-		fmt.Print(node.Value)
-		node = node.Next
+	var aux = node
+	for aux != nil {
+		fmt.Print(aux.Value)
+		aux = aux.Next
 	}
 }
 
@@ -42,27 +43,26 @@ func SLInsertFirst(list *SLNodeInt, node *SLNodeInt) {
 }
 
 //SLFindPrevious finds previous node
-func SLFindPrevious(head *SLNodeInt, node *SLNodeInt) *SLNodeInt {
-	if head == nil || node == nil {
+func (node *SLNodeInt) SLFindPrevious(head *SLNodeInt) *SLNodeInt {
+	var aux = head
+	if aux == nil || node == nil {
 		return nil
 	}
-	for head.Next != node || head.Next != nil {
-		head = head.Next
+	for aux != nil {
+		if aux.Next == node {
+			return aux
+		}
+		aux = aux.Next
 	}
-	if head.Next == node {
-		return head
-	}
+
 	return nil
 }
 
 //SLSwapNodes adds node to the list in the right spot
 func SLSwapNodes(head *SLNodeInt, nodeA *SLNodeInt, nodeB *SLNodeInt) {
-	for head != nil {
-		if head == nodeA {
-
-		}
-		if head == nodeB {
-
-		}
+	if head == nil || nodeA == nil || nodeB == nil {
+		return
 	}
+	nodeA.SLFindPrevious(head)
+	nodeB.SLFindPrevious(head)
 }
