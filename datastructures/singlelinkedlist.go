@@ -32,6 +32,8 @@ func SLAppendNode(list *SLNodeInt, node *SLNodeInt) {
 func SLDisplayValues(node *SLNodeInt) {
 	var aux = node
 	for aux != nil {
+
+		fmt.Print("->")
 		fmt.Print(aux.Value)
 		aux = aux.Next
 	}
@@ -63,6 +65,19 @@ func SLSwapNodes(head *SLNodeInt, nodeA *SLNodeInt, nodeB *SLNodeInt) {
 	if head == nil || nodeA == nil || nodeB == nil {
 		return
 	}
-	nodeA.SLFindPrevious(head)
-	nodeB.SLFindPrevious(head)
+	var previousA = nodeA.SLFindPrevious(head)
+	var previousB = nodeB.SLFindPrevious(head)
+	var nextA = nodeA.Next
+	var nextB = nodeB.Next
+
+	previousB.Next = nodeA
+	previousA.Next = nodeB
+
+	nodeA.Next = nextB
+	nodeB.Next = nextA
+}
+
+//SLbubbleSort sorts single linked list using bubble sort algorithm
+func SLbubbleSort(head *SLNodeInt) {
+
 }
