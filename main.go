@@ -23,11 +23,17 @@ func main() {
 		}
 	}
 	datastructures.SLDisplayValues(head)
-	var prev = temp.SLFindPrevious(head)
+	//var prev = temp.SLFindPrevious(head)
+	//fmt.Println(prev.Value)
+
 	fmt.Print("\n")
-	fmt.Println(prev.Value)
-	datastructures.SLDisplayValues(head)
 	datastructures.SLSwapNodes(head, temp, tempS)
+	datastructures.SLDisplayValues(head)
+
+	fmt.Print("\n")
+	fmt.Print("\n")
+	fmt.Print("\n")
+	datastructures.SLSwapNodes(head, tempS, head)
 	fmt.Print("\n")
 
 	datastructures.SLDisplayValues(head)

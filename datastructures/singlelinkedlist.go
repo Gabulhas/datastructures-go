@@ -62,22 +62,31 @@ func (node *SLNodeInt) SLFindPrevious(head *SLNodeInt) *SLNodeInt {
 
 //SLSwapNodes adds node to the list in the right spot
 func SLSwapNodes(head *SLNodeInt, nodeA *SLNodeInt, nodeB *SLNodeInt) {
-	if head == nil || nodeA == nil || nodeB == nil {
+	if head == nil || nodeA == nil || nodeB == nil || nodeA == nodeB {
 		return
 	}
-	var previousA = nodeA.SLFindPrevious(head)
-	var previousB = nodeB.SLFindPrevious(head)
-	var nextA = nodeA.Next
-	var nextB = nodeB.Next
-
-	previousB.Next = nodeA
-	previousA.Next = nodeB
-
-	nodeA.Next = nextB
-	nodeB.Next = nextA
 }
 
 //SLbubbleSort sorts single linked list using bubble sort algorithm
 func SLbubbleSort(head *SLNodeInt) {
+	var flag bool = true
+	for flag {
+		var aux = head
+		var secondFlag bool = true
+		for head != nil {
+			fmt.Printf("%d", head.GetValue())
+			fmt.Printf("%d", head.Next.GetValue())
+			if head.Value > head.Next.Value {
+				SLSwapNodes(aux, head, head.Next)
+				secondFlag = false
+			}
+			head = head.Next
+		}
 
+		head = aux
+		if secondFlag {
+			flag = false
+		}
+		secondFlag = true
+	}
 }
