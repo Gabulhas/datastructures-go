@@ -23,18 +23,25 @@ func main() {
 		}
 	}
 	datastructures.SLDisplayValues(head)
-	//var prev = temp.SLFindPrevious(head)
-	//fmt.Println(prev.Value)
+	temp.SLremoveNode(head)
+	datastructures.SLDisplayValues(head)
+	tempS.SLremoveNode(head)
+	datastructures.SLDisplayValues(head)
+	aux := head
+	for aux != nil {
+		nextNode := aux.Next
+		if aux.GetValue()%2 == 0 {
+			aux.SLremoveNode(head)
+		}
+		aux = nextNode
+	}
+	datastructures.SLDisplayValues(head)
+	tempF, _ := datastructures.SLFind(5, head)
+	tempH := datastructures.SLMakeNode()
+	tempH.Value = 192
+	tempF.SLAddNext(tempH)
 
-	fmt.Print("\n")
-	datastructures.SLSwapNodes(head, temp, tempS)
 	datastructures.SLDisplayValues(head)
 
-	fmt.Print("\n")
-	fmt.Print("\n")
-	fmt.Print("\n")
-	datastructures.SLSwapNodes(head, tempS, head)
-	fmt.Print("\n")
-
-	datastructures.SLDisplayValues(head)
+	fmt.Println(datastructures.SLFindLoop(head))
 }

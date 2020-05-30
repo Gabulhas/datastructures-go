@@ -1,6 +1,9 @@
 package datastructures
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 //SLNodeInt SL = Single Link
 //SLNodeInt contains struct to store a Single Linked list struct containing a int Value
@@ -37,6 +40,7 @@ func SLDisplayValues(node *SLNodeInt) {
 		fmt.Print(aux.Value)
 		aux = aux.Next
 	}
+	fmt.Printf("\n")
 }
 
 //SLInsertFirst adds node to the start of a line
@@ -65,10 +69,25 @@ func SLSwapNodes(head *SLNodeInt, nodeA *SLNodeInt, nodeB *SLNodeInt) {
 	if head == nil || nodeA == nil || nodeB == nil || nodeA == nodeB {
 		return
 	}
+	if nodeB == nodeA {
+		return
+	}
+	nodeAPrev := nodeA.SLFindPrevious(head)
+	nodeBPrev := nodeB.SLFindPrevious(head)
+	if nodeAPrev != nil {
+		nodeAPrev.Next = nodeB
+	}
+	if nodeBPrev != nil {
+		nodeBPrev.Next = nodeA
+	}
+	tem := nodeA.Next
+	nodeA.Next = nodeB.Next
+	nodeB.Next = tem
+
 }
 
-//SLbubbleSort sorts single linked list using bubble sort algorithm
-func SLbubbleSort(head *SLNodeInt) {
+//SLBubbleSort sorts single linked list using bubble sort algorithm
+func SLBubbleSort(head *SLNodeInt) {
 	var flag bool = true
 	for flag {
 		var aux = head
@@ -89,4 +108,76 @@ func SLbubbleSort(head *SLNodeInt) {
 		}
 		secondFlag = true
 	}
+}
+
+//SLremoveNode removes node from given head/list
+func (node *SLNodeInt) SLremoveNode(head *SLNodeInt) {
+	if node == nil || head == nil {
+		return
+	}
+	previous := node.SLFindPrevious(head)
+	if previous != nil {
+
+		previous.Next = node.Next
+	}
+	node = nil
+
+}
+
+//SLAddNext adds node in front of the current node
+func (node *SLNodeInt) SLAddNext(NodeA *SLNodeInt) {
+	if node == nil || NodeA == nil {
+		return
+	}
+	temp := node.Next
+	node.Next = NodeA
+	NodeA.Next = temp
+
+}
+
+//SLFind return first node with a value
+func SLFind(value int, head *SLNodeInt) (*SLNodeInt, error) {
+
+	if head == nil {
+		return nil, errors.New("invalid_head")
+	}
+	aux := head
+
+	for aux != nil {
+
+		if aux.GetValue() == value {
+			return aux, nil
+		}
+		aux = aux.Next
+	}
+
+	return nil, errors.New("not_found")
+
+}
+
+//SLFindLoop finds if list is a loop using Floyd's Tortoise and Hare algorithm
+func SLFindLoop(head *SLNodeInt) bool {
+
+	if head == nil {
+		return false
+	}
+	p1 := head
+	p2 := head
+
+	for p1.Next != nil && p2.Next.Next != nil {
+
+		p1 = p1.Next
+		p2 = p2.Next.Next
+		if p1 == p2 {
+			p1 = head
+			for p1 != p2 {
+				p1 = p1.Next
+				p2 = p2.Next
+
+			}
+			return true
+		}
+
+	}
+	return false
 }
