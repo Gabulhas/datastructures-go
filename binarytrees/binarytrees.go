@@ -65,6 +65,18 @@ func BTdisplayAllValues(head *BTNodeInt) {
 	BTdisplayAllValues(head.NextL)
 }
 
+//BTdisplayAllValuesAndLevels does what the name of the function says :D
+func BTdisplayAllValuesAndLevels(head *BTNodeInt, level int) {
+	if head == nil {
+		return
+	}
+
+	fmt.Println(level, " ", head.Value)
+	BTdisplayAllValuesAndLevels(head.NextR, level+1)
+	BTdisplayAllValuesAndLevels(head.NextL, level+1)
+
+}
+
 func randomInt(max, min int) int {
 
 	return rand.Intn(max-min+1) + min
