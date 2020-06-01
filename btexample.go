@@ -11,4 +11,10 @@ func main() {
 	fmt.Println(dtbn.BTSize(tree))
 	dtbn.BTdisplayAllValues(tree)
 	dtbn.BTdisplayAllValuesAndLevels(tree, 0)
+
+	temo := tree.NextL.NextR //random one idk
+
+	temp := dtbn.BTfindNode(tree, temo.Value)
+	fmt.Println(temp == temo)
+
 }

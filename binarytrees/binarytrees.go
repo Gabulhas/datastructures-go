@@ -81,3 +81,36 @@ func randomInt(max, min int) int {
 
 	return rand.Intn(max-min+1) + min
 }
+
+//BTfindNode returns first node with give value
+func BTfindNode(head *BTNodeInt, value int) *BTNodeInt {
+
+	if head == nil {
+		return nil
+	}
+
+	if head.Value == value {
+		return head
+	}
+
+	left := BTfindNode(head.NextL, value)
+	right := BTfindNode(head.NextR, value)
+
+	if right != nil && left != nil {
+		//if there is a root that has two leaves with the value it returns one at random
+
+		switch randomInt(1, 0) {
+		case 1:
+			return right
+		case 0:
+			return left
+		}
+	}
+	if right != nil {
+		return right
+	}
+	if left != nil {
+		return left
+	}
+	return nil
+}
